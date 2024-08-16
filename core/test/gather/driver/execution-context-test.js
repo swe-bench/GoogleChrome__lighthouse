@@ -43,7 +43,7 @@ describe('ExecutionContext', () => {
 
     const frameListener = sessionMock.on.mock.calls
       .find(call => call[0] === 'Page.frameNavigated') ?? [];
-    expect(frameListener).toBeDefined();
+    expect(frameListener[1]).toBeDefined();
 
     await forceNewContextId(executionContext, 42);
     expect(executionContext.getContextId()).toEqual(42);
@@ -56,7 +56,7 @@ describe('ExecutionContext', () => {
 
     const executionDestroyed = sessionMock.on.mock.calls
       .find(call => call[0] === 'Runtime.executionContextDestroyed') ?? [];
-    expect(executionDestroyed).toBeDefined();
+    expect(executionDestroyed[1]).toBeDefined();
 
     await forceNewContextId(executionContext, 42);
     expect(executionContext.getContextId()).toEqual(42);
